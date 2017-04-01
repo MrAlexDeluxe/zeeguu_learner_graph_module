@@ -86,7 +86,7 @@ function draw_line_graph(input_data, appendTo, win_width, months_to_show) {
     if (months_to_show == 1) {
         var xAxis = d3.svg.axis()
             .scale(xScale)
-            .orient("bottom").ticks(30)
+            .orient("bottom").ticks(15)
             .tickFormat(d3.time.format("%d %b %Y"));
     }else{
         var xAxis = d3.svg.axis()
