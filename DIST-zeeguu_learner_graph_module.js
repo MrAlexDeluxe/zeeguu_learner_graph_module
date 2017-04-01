@@ -1,6 +1,6 @@
 
 /**
-* Created by A.Lukjanenkovs on 21.06.2016. This DIST version generated on 25.03.2017
+* Created by A.Lukjanenkovs on 21.06.2016. This DIST version generated on 01.04.2017
 */
 
 
@@ -221,30 +221,27 @@ function draw_activity_graph(input_data_a, appendTo) {
 
     // end of text adding
 
-    d3.json(input_data, function () {
+    var nested_input_data = d3.nest()
+        .key(function (entry) {
+            return entry.date;
+        })
+        .rollup(function (entry) {
+            return entry[0].count;
+        })
+        .map(input_data);
 
-        var nested_input_data = d3.nest()
-            .key(function (entry) {
-                return entry.date;
-            })
-            .rollup(function (entry) {
-                return entry[0].count;
-            })
-            .map(input_data);
-
-        // editing tooltip for filled day_rectangles
-        day_rectangles.filter(
-            function (date) {
-                return date in nested_input_data;
-            })
-            .attr("class", function (index) {
-                return "day " + color_getter(nested_input_data[index]);
-            })
-            .select("title")
-            .text(function (date) {
-                return nested_input_data[date] + " translations on " + date;
-            });
-    });
+    // editing tooltip for filled day_rectangles
+    day_rectangles.filter(
+        function (date) {
+            return date in nested_input_data;
+        })
+        .attr("class", function (index) {
+            return "day " + color_getter(nested_input_data[index]);
+        })
+        .select("title")
+        .text(function (date) {
+            return nested_input_data[date] + " translations on " + date;
+        });
 
     input_data.sort(compare_dates_strings); // sort array based on the dates
 
@@ -357,7 +354,7 @@ function draw_line_graph(input_data, appendTo, win_width, months_to_show) {
     if (months_to_show == 1) {
         var xAxis = d3.svg.axis()
             .scale(xScale)
-            .orient("bottom").ticks(30)
+            .orient("bottom").ticks(15)
             .tickFormat(d3.time.format("%d %b %Y"));
     }else{
         var xAxis = d3.svg.axis()
