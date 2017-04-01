@@ -26,7 +26,7 @@ Input json entry format should be :
 
 ### Call the function
 ```
-    activity_graph(<input_data>, <append_to>);
+    activity_graph(<input_data>, <element_to_draw_in>);
 ```
 
 ### Example
@@ -60,21 +60,21 @@ NB: Every month (if showing period of 5..12 months) or date (if showing period o
 
 ### Call the function
 ```
-    line_graph(<input_data>, <append_to>, <window_width>, <months_to_display>);
+    line_graph(<input_data>, <element_to_draw_in>, <window_width>, <months_to_display>);
 ```
 
 NB: <months_to_display> is a parameter how many months to display in the graph (not including the current month). If number 6 is typed, then 7 months will actually be displayed.
 
  Displaying for one year :   
 ```
-    line_graph(<input_data>, <append_to>, window_width);
+    line_graph(<input_data>, <element_to_draw_in>, window_width);
     or
-    line_graph(<input_data>, <append_to>, window_width, 12);
+    line_graph(<input_data>, <element_to_draw_in>, window_width, 12);
 ```
  
  Displaying for one month :  
 ```
-    line_graph(<input_data>, <append_to>, window_width, 1);
+    line_graph(<input_data>, <element_to_draw_in>, window_width, 1);
 ```
 
 ### Example 
@@ -118,7 +118,7 @@ Input json entry format should be :
 
 ### Call the function
 ```
-    piechart_graph(<input_data>, <append_to>, <name>);
+    piechart_graph(<input_data>, <element_to_draw_in>, <name>);
 ```
 
 ### Example
