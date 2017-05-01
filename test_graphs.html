@@ -20,22 +20,22 @@
 <br/><br/><br/>
 <zeeguu_graph id="line_graph" autoresize="true"></zeeguu_graph>
 <br/>
-    <button onclick="display_months(6, '#line_graph', line_graph_input_data)" value="6 months">6 months</button>
-    <button onclick="display_months(9, '#line_graph', line_graph_input_data)" value="9 months">9 months</button>
-    <button onclick="display_months(12, '#line_graph', line_graph_input_data)" value="12 months">1 year</button>
+    <button onclick="display_months(6, 'line_graph', line_graph_input_data)" value="6 months">6 months</button>
+    <button onclick="display_months(9, 'line_graph', line_graph_input_data)" value="9 months">9 months</button>
+    <button onclick="display_months(12, 'line_graph', line_graph_input_data)" value="12 months">1 year</button>
 <br/><br/>
     <button onclick="change_months_showed_by_x_amount('line_graph', line_graph_input_data, 1)" value="increase">+</button>
     <button onclick="change_months_showed_by_x_amount('line_graph', line_graph_input_data, -1)" value="decrease">-</button>
 <br/><br/>
 
-<zeeguu_graph id="line_graph_month"></zeeguu_graph>
+<zeeguu_graph id="line_graph_month" autoresize="true"></zeeguu_graph>
 <br/><br/><br/>
 <zeeguu_graph id="piechart_graph"></zeeguu_graph>
 
 <script>
 
     function hideFunction(name){
-        document.getElementsByTagName(name)[0].style.display = "none";
+        document.getElementById(name).style.display = "none";
     }
 
     function gen_data_for_ldata(names, startDate, for_days) {
@@ -74,6 +74,9 @@
     var activity_graph_input_data = [{"date": "2016-06-01", "count": "123"}, {"date": "2016-05-28", "count": "5"}];
     activity_graph(activity_graph_input_data, "#activity_graph");
 
+
+
+
     // line graph call with months
     var window_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var names = ["Mathematics", "History"];
@@ -83,7 +86,10 @@
 
     var line_graph_input_data = gen_data_for_ldata(names, start_date, false);
     line_graph(line_graph_input_data, "#line_graph", window_width);
+    document.getElementById("line_graph").setAttribute("months_to_show", 12);
+    // save pointer to the input data for resizing purposes
     document.getElementById("line_graph").setAttribute("input_data", "line_graph_input_data");
+
 
 
     // line graph call with days
@@ -92,6 +98,9 @@
 
     var line_graph_input_data_month = gen_data_for_ldata(names, start_date, true);
     line_graph(line_graph_input_data_month, "#line_graph_month", window_width, 1);
+    document.getElementById("line_graph_month").setAttribute("months_to_show", 1);
+    // save pointer to the input data for resizing purposes
+    document.getElementById("line_graph_month").setAttribute("input_data", "line_graph_input_data_month");
 
 
     // piechart graph call
@@ -105,8 +114,8 @@
 </script>
 
 <br/><br/>
-<button onclick="hideFunction('#activity_graph')" value="agraph">Hide agraph</button>
-<button onclick="hideFunction('#piechart_graph')" value="pgraph">Hide pgraph</button>
+<button onclick="hideFunction('activity_graph')" value="agraph">Hide agraph</button>
+<button onclick="hideFunction('piechart_graph')" value="pgraph">Hide pgraph</button>
 <br/><br/>
 
 </body>

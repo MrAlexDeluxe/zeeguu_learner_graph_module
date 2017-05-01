@@ -101,9 +101,9 @@ Full example of 1 year period :
         {"name": "History", "amount": "5", "date": "Feb 2017"}, {"name": "History", "amount": "6", "date": "Mar 2017"}
     ];
     
-    
-    // call the function (js)
+     
     var window_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    // call the function (js)
     line_graph(line_graph_input_data, "#line_graph", window_width);
 ```
 
