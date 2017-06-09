@@ -8,10 +8,10 @@ $("head").append('<link href="https://fonts.googleapis.com/css?family=PT+Sans" r
 // initialization function for activity graph
 // input json entry format should be :
 // [{"date": "2016-05-28", "count": "123"}]
-function activity_graph(input_data, appendTo){
+function activity_graph(input_data, appendTo, months_to_show){
     $("head").append('<link rel="stylesheet" type="text/css" href="CSS/graphs/activity_graph/activity_graph.css">');
     $("head").append('<script type="text/javascript" src="Scripts/graphs/activity_graph/activity_graph.js" charset="utf-8"></script>');
-    draw_activity_graph(input_data, appendTo);
+    draw_activity_graph(input_data, appendTo, months_to_show);
 }
 
 // initialization function for line graph

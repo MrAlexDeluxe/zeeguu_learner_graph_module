@@ -61,9 +61,9 @@ $("head").append(\'<link href="https://fonts.googleapis.com/css?family=PT+Sans" 
 // initialization function for activity graph
 // input json entry format should be :
 // [{"date": "2016-05-28", "count": "123"}]
-function activity_graph(input_data, appendTo){
+function activity_graph(input_data, appendTo, months_to_show){
     append_css_for_activity_graph(appendTo);
-    draw_activity_graph(input_data, appendTo);
+    draw_activity_graph(input_data, appendTo, months_to_show);
 }
 
 // initialization function for line graph
