@@ -134,8 +134,8 @@ function draw_activity_graph(input_data_a, appendTo, months_to_show) {
 
     // needed offset for calculating right positions for draw elements
     var months_offset = 12 - months_to_show;
-    // recalculating width + 50px offset for error
-    width = months_to_show * 5 * cellSize + 50;
+    // recalculating width + 55px offset for error
+    width = months_to_show * 5 * cellSize + 55;
 
 
     input_data = input_data_a;
@@ -191,7 +191,7 @@ function draw_activity_graph(input_data_a, appendTo, months_to_show) {
     // text adding
 
     // adding month names to the graph
-    for (var index = 0 + months_offset; index < months_in_year+1; index++) { // edited
+    for (var index = 0 + months_offset; index < months_in_year; index++) { // edited
         var temp_year = year;
         var temp_month = month;
         var left_offset_of_matrix = 45;
@@ -261,6 +261,6 @@ function draw_activity_graph(input_data_a, appendTo, months_to_show) {
 
     html += "</div>";
 
-    $(html).appendTo( document.getElementsByTagName(appendTo)[0] );
+    $(html).appendTo( document.getElementById(appendTo.substring(1)) );
 
 }
