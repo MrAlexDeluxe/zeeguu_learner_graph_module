@@ -54,18 +54,4 @@ function redraw_activity_graph(months_to_show, element_id, input_data){
     activity_graph(input_data, "#" + element_id, months_to_show);
 }
 
-// increasing/decreasing month amount displayed
-function change_months_showed_by_x_amount (element_id, input_data, amount){
-    var zeeguu_graph = document.getElementById(element_id);
-    var months_to_show = parseInt(zeeguu_graph.getAttribute("months_to_show")) + parseInt(amount);
-
-    if (isNaN(months_to_show)){
-        months_to_show = 11;
-    }
-
-    months_to_show = Math.max(5, months_to_show);
-
-    zeeguu_graph.setAttribute("months_to_show", months_to_show);
-    redraw_line_graph(months_to_show, "#"+element_id, input_data);
-}
 
