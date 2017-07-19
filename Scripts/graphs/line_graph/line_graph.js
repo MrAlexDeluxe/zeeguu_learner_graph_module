@@ -1,5 +1,8 @@
 
-function draw_line_graph(input_data, appendTo, win_width, months_to_show) {
+function draw_line_graph(input_data, appendTo, months_to_show) {
+
+    // get size of th client window width
+    var win_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
     // fetching learner_stats_data from the server and parsing(nesting) it for d3js library
     var input_data_nested = d3.nest()
@@ -13,11 +16,7 @@ function draw_line_graph(input_data, appendTo, win_width, months_to_show) {
     // setting up graph and its parameters
     // graph's width adjusts based on the client window size
     // max graph width is 1200px and min is 500px
-    if (!isNaN(win_width)) {
-        var WIDTH = Math.max(500 ,Math.min(1200, win_width));
-    }else{
-        var WIDTH = 1200;
-    }
+    var WIDTH = Math.max(500 ,Math.min(1200, win_width));
     var HEIGHT = 500;
 
     // how many months to show
@@ -28,14 +27,24 @@ function draw_line_graph(input_data, appendTo, win_width, months_to_show) {
     var extraHeight = 0;
     // check if 1 month was requested
     if (months_to_show != 1) {
-        months_to_show = Math.max(5, months_to_show);
+        // check months limits
+        months_to_show = Math.min(months_to_show, Math.round(win_width / 100));
+        months_to_show = Math.max(5, Math.min(12,months_to_show));
+
         // slice array and take only part we need based on how many months to show
         input_data_nested.forEach(function (element) {
             element.values = element.values.slice(-months_to_show - 1, element.values.length);
         });
+        // add attribute type to the graph for resize functionality
+        d3.select(appendTo).attr("type", "line");
     }else{
         extraHeight = 55; // added extraHeight for better displaying date names for month
+        // add attribute type to the graph for resize functionality
+        d3.select(appendTo).attr("type", "line_month");
     }
+
+    // add attribute to the graph of how many months to show for resize functionality
+    d3.select(appendTo).attr("months_to_show", months_to_show);
 
 
     var line_graph = d3.select(appendTo)

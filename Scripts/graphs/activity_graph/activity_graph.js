@@ -132,6 +132,18 @@ function draw_activity_graph(input_data_a, appendTo, months_to_show) {
         var months_to_show = 12;
     }
 
+    // get client window size (-55px is reserved space for names of week days on left side)
+    var win_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 55;
+
+    // check months limits
+    months_to_show = Math.max(3, months_to_show);
+    months_to_show = Math.min(months_to_show, Math.round(win_width / 100));
+
+    // add attribute to the graph of how many months to show for resize functionality
+    d3.select(appendTo).attr("months_to_show", months_to_show);
+    // add attribute type to the graph for resize functionality
+    d3.select(appendTo).attr("type", "activity");
+
     // needed offset for calculating right positions for draw elements
     var months_offset = 12 - months_to_show;
     // recalculating width + 55px offset for error
@@ -244,7 +256,7 @@ function draw_activity_graph(input_data_a, appendTo, months_to_show) {
     input_data.sort(compare_dates_strings); // sort array based on the dates
 
     var html = "<br/><br/><br/>";
-    html += '<div class="row" style="width: 850px;height: 80px; padding: 0px 50px;">';
+    html += '<div class="row" style="height: 80px; padding: 0px 50px;">';
     html += '<div class="col-xs-4 col-md-4">';
     html += "<h4>Translations in this period</h4> <h3>" + total_bookmarks_per_displayed_period() + " Total" + "</h3>";
     html += "</div>";

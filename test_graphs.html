@@ -16,7 +16,7 @@
 
 <body>
 
-<zeeguu_graph id="activity_graph"></zeeguu_graph>
+<zeeguu_graph id="activity_graph" autoresize="true"></zeeguu_graph>
 <br/><br/><br/>
 
 <zeeguu_graph id="line_graph" autoresize="true"></zeeguu_graph>
@@ -78,20 +78,18 @@
     // activity graph call
     var activity_graph_input_data = [{"date": "2017-06-01", "count": "123"}, {"date": "2017-05-28", "count": "5"}];
     activity_graph(activity_graph_input_data, "#activity_graph", 12);
-
+    document.getElementById("activity_graph").setAttribute("input_data", "activity_graph_input_data");
 
 
 
     // line graph call with months
-    var window_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var names = ["Mathematics", "History"];
 
     var start_date = new Date();
     start_date.setFullYear( start_date.getFullYear() - 1 );
 
     var line_graph_input_data = gen_data_for_ldata(names, start_date, false);
-    line_graph(line_graph_input_data, "#line_graph", window_width);
-    document.getElementById("line_graph").setAttribute("months_to_show", 12);
+    line_graph(line_graph_input_data, "#line_graph", 12);
     // save pointer to the input data for resizing purposes
     document.getElementById("line_graph").setAttribute("input_data", "line_graph_input_data");
 
@@ -103,8 +101,7 @@
     start_date.setMonth( start_date.getMonth() - 1 );
 
     var line_graph_input_data_month = gen_data_for_ldata(names, start_date, true);
-    line_graph(line_graph_input_data_month, "#line_graph_month", window_width, 1);
-    document.getElementById("line_graph_month").setAttribute("months_to_show", 1);
+    line_graph(line_graph_input_data_month, "#line_graph_month", 1);
     // save pointer to the input data for resizing purposes
     document.getElementById("line_graph_month").setAttribute("input_data", "line_graph_input_data_month");
 
