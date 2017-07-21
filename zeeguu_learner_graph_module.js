@@ -11,7 +11,8 @@ $("head").append('<link href="https://fonts.googleapis.com/css?family=PT+Sans" r
 function activity_graph(input_data, appendTo, months_to_show){
     $("head").append('<link rel="stylesheet" type="text/css" href="CSS/graphs/activity_graph/activity_graph.css">');
     $("head").append('<script type="text/javascript" src="Scripts/graphs/activity_graph/activity_graph.js" charset="utf-8"></script>');
-    draw_activity_graph(input_data, appendTo, months_to_show);
+    d3.select(appendTo).attr("input_data", input_data);     // save pointer to the input data for resizing purposes
+    draw_activity_graph(window[input_data], appendTo, months_to_show);
 }
 
 // initialization function for line graph
@@ -20,7 +21,8 @@ function activity_graph(input_data, appendTo, months_to_show){
 function line_graph(input_data, appendTo, months_to_show){
     $("head").append('<link rel="stylesheet" type="text/css" href="CSS/graphs/line_graph/line_graph.css">');
     $("head").append('<script type="text/javascript" src="Scripts/graphs/line_graph/line_graph.js" charset="utf-8"></script>');
-    draw_line_graph(input_data, appendTo, months_to_show);
+    d3.select(appendTo).attr("input_data", input_data);     // save pointer to the input data for resizing purposes
+    draw_line_graph(window[input_data], appendTo, months_to_show);
 }
 
 // initialization function for piechart graph

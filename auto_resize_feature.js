@@ -28,12 +28,12 @@ function resize() {
             var type = zeeguu_graph.getAttribute("type");
             if (type == "line") {
                 months_to_show = Math.min(12, Math.round(width / 100));
-                redraw_line_graph(months_to_show, element_id, window[input_data]);
+                redraw_line_graph(months_to_show, element_id, input_data);
             } else if (type == "activity"){
                 months_to_show = Math.min(12, Math.round((width-55) / 100));
-                redraw_activity_graph(months_to_show, element_id, window[input_data]);
+                redraw_activity_graph(months_to_show, element_id, input_data);
             } else if (type == "line_month"){
-                redraw_line_graph(months_to_show, element_id, window[input_data]);
+                redraw_line_graph(months_to_show, element_id, input_data);
             }
         }
     }
