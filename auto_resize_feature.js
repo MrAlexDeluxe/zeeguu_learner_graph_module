@@ -43,7 +43,7 @@ function resize() {
 // function for redrawing line graph
 // element_id is the ID of the zeeguu_graph tag
 function redraw_line_graph(months_to_show, element_id, input_data){
-    d3.selectAll("#" + element_id + ' > svg').remove();
+    d3.selectAll("#" + element_id).selectAll("*").remove();
     line_graph(input_data, "#" + element_id, months_to_show);
 }
 
