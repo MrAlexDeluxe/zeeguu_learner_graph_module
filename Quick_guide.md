@@ -26,7 +26,7 @@ Input json entry format should be :
 
 ### Call the function
 ```
-    activity_graph(<input_data>, <element_to_draw_in>);
+    activity_graph(<input_data_var_name>, <element_to_draw_in>, <how_many_months_display>);
 ```
 
 ### Example
@@ -41,10 +41,10 @@ Input json entry format should be :
     
     
     // call the function (js)
-     activity_graph(activity_graph_input_data, "#activity_graph");
+     activity_graph("activity_graph_input_data", "#activity_graph", 12);
 ```
 
-![activity_graph](http://gdurl.com/CEec)
+![activity_graph](http://gdurl.com/cTmc)
 
 ----------------
 
@@ -60,29 +60,28 @@ NB: Every month (if showing period of 5..12 months) or date (if showing period o
 
 ### Call the function
 ```
-    line_graph(<input_data>, <element_to_draw_in>, <window_width>, <months_to_display>);
+    line_graph(<input_data_var_name>, <element_to_draw_in>, <how_many_months_display>);
 ```
 
-NB: <months_to_display> is a parameter how many months to display in the graph (not including the current month). If number 6 is typed, then 7 months will actually be displayed.
+NB: <how_many_months_display> is a parameter how many months to display in the graph (not including the current month). If number 6 is typed, then 7 months will actually be displayed.
 
- Displaying for one year :   
+ Displaying for the one year :   
 ```
-    line_graph(<input_data>, <element_to_draw_in>, window_width);
+    line_graph(<input_data_var_name>, <element_to_draw_in>);
     or
-    line_graph(<input_data>, <element_to_draw_in>, window_width, 12);
+    line_graph(<input_data_var_name>, <element_to_draw_in>, 12);
 ```
  
- Displaying for one month :  
+ Displaying for the one month :  
 ```
-    line_graph(<input_data>, <element_to_draw_in>, window_width, 1);
+    line_graph(<input_data_var_name>, <element_to_draw_in>, 1);
 ```
 
 ### Example 
 Full example of 1 year period :
 ```
-    // add next 2 lines anywhere you want display the graph (html)
+    // add this line anywhere you want display the graph (html)
     <zeeguu_graph id="line_graph"></zeeguu_graph>
-    <br/><br/><br/>
 ```
 ```
     // prepare the input_data (js)
@@ -102,12 +101,26 @@ Full example of 1 year period :
     ];
     
      
-    var window_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     // call the function (js)
-    line_graph(line_graph_input_data, "#line_graph", window_width);
+    line_graph("line_graph_input_data", "#line_graph", 12);
 ```
 
-![line_graph](http://gdurl.com/j9W0)
+![line_graph](http://gdurl.com/avgr)
+
+Full example of 1 month period :
+```
+    // add this line anywhere you want display the graph (html)
+    <zeeguu_graph id="line_graph_month"></zeeguu_graph>
+```
+```
+    // prepare the input_data (js)
+    var line_graph_input_data_month = {...};
+     
+    // call the function (js)
+    line_graph("line_graph_input_data_month", "#line_graph_month", 1);
+```
+
+![line_graph_month](http://gdurl.com/iJLd)
 
 ----------------
 
@@ -142,38 +155,40 @@ Input json entry format should be :
 
 ----------------
 
-# Third step - adding scalability for the line graph (optional)
-## Adding realtime scalability for the line graph.  
+# Third step - adding scalability for the activity graph and the line graph
+## Adding realtime scalability for the activity graph and the line graph.  
 
-1) Add mob_ver.js to your page.
+1) Add auto_resize_feature.js to your page.
 ```
-<script type="text/javascript" src="mob_ver.js" charset="utf-8"></script>
-```
-
-2) Add 2 attributes to your line graph which you want to enable auto resize functionality.
-```
-<zeeguu_graph id="line_graph" autoresize="true" input_data="line_graph_input_data"></zeeguu_graph>
+<script type="text/javascript" src="auto_resize_feature.js" charset="utf-8"></script>
 ```
 
-autoresize = [true/false] : width for the graph should be fixed or be adjusted based on the client screen width.
+2) Add attribute to your activity or line graph which you want to enable auto resize functionality.
+```
+<zeeguu_graph id="activity_graph" autoresize="true"></zeeguu_graph>
+OR
+<zeeguu_graph id="line_graph" autoresize="true"></zeeguu_graph>
+```
 
-input_data : remembers the name of the variable where is input_data stored.
+autoresize = [true/false] : width of the graph will be adjusted based on the client screen width.
+
+## Examples
+
+1) Activity graph. By default can scale up to 3 months.
+
+![activity_graph_small](http://gdurl.com/DoOK)
+
+2) Line graph. By default can scale up to 5 months.
+
+![line_graph_small](http://gdurl.com/ce3s)
+
+3) Line graph for 1 month.
+
+![line_graph_month_small](http://gdurl.com/DjAM)
+
+NB: Default scale limits can be changed. For each graph, default limits are given based on how many months of the graph can fit on the mobile screen without scrolling.
 
 ----------------
 
 
-2) Adding buttons which change the graph per user request.
 
-Add this html code anywhere you want buttons for the line graph. Examples below.
-```
-
-    <button onclick="display_months(6, '#line_graph', line_graph_input_data)" value="6 months">6 months</button>
-    <button onclick="display_months(9, '#line_graph', line_graph_input_data)" value="9 months">9 months</button>
-    <button onclick="display_months(12, '#line_graph', line_graph_input_data)" value="12 months">1 year</button>
-
-    <button onclick="change_months_showed_by_x_amount('line_graph', line_graph_input_data, 1)" value="increase">+</button>
-    <button onclick="change_months_showed_by_x_amount('line_graph', line_graph_input_data, -1)" value="decrease">-</button>
-
-```
-
-----------------
